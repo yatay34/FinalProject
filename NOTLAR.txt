@@ -1,0 +1,47 @@
+PnP = Plug and Play (Tak ve Çalýþtýr)
+
+Business -- API katmaný -- (Android/IOS/UI(Asp.Net)...)
+API : Restful mimarisi(standart)ile karþýmýza çýkýyor-->
+   JSon formatý sonraki versiyonlarý SOAP mimarisi 
+Restful: SOAP ýn daha light ve kullanýþlý bir versiyonudur. 
+Farklý sistemlerin birbirini anlayabilmesi için kullanýlan teknlji/standart
+
+DataAccess : sql leri yazýyoruz 
+Business : iþ kurallarýný 
+
+LINQ = Language Integrated Query
+--------------------------------------------------------------
+--------------------------------------------------------------
+ctor : constuctor oluþturma snippet
+
+* Çýplak class kalmasýn
+* IEntity -- implement eden class bir vt tablosudur. 
+
+* interfacelerin kendileri deðil operasyonlarý PUBLIC tir
+
+Naming Commension (Global Ýsimlendirme)
+   -  class local deðiþkenler : _products
+--------------------------------------------------------------
+--------------------------------------------------------------
+ClassLibrary (.NET Standart)  --- DataAccess, Business, Entities
+Console App  (.NET Core)      --- UIConsole / ConsoleUI 
+
+
+DataAccess, Business, Entities projelerine 
+     +  Abstract, Concrete klasörleri  
+     
+               ***** Çýplak class kalmasýn!!   
+               IEntity -- implement eden class bir vt tablosudur. 
+* Entities >Abstract  +IEntity
+* Entities >Concrete  +Product, Category 
+
+Dal(DataAccessLayer)-Dao(DataAccessObject)
+.... ADO.Net, EntityFramework, Hibernate, Dapper vb
+---- alternatif teknolojileri olan bir þey kodluyorsanýz KLASÖRlemeyi ihmal etme.
+
+* DataAccess >Abstract  +IProductDal
+* DataAccess >Concrete  +InMemory, EntityFramework klasörleri..
+
+* DataAccess >Concrete >InMemory > ( InMemoryProductDal.cs : IProductDal )
+                        
+* Business >Abstract  +IProductService             
