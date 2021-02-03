@@ -3,6 +3,7 @@ using Entities.Concrete;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Linq.Expressions;
 using System.Text;
 
 namespace DaraAccess.Concrete.InMemory
@@ -23,13 +24,8 @@ namespace DaraAccess.Concrete.InMemory
                 new Product{ProductId=6, CategoryId=2, ProductName="Klavye", UnitPrice=150, UnitsInStock=65 },
                 new Product{ProductId=7, CategoryId=2, ProductName="Fare", UnitPrice=50, UnitsInStock=1 },  
             };     
-        }
+        } 
 
-
-        public List<Product> GetAll()
-        {
-            return _products;
-        }
 
         public void Add(Product product)
         {
@@ -57,9 +53,24 @@ namespace DaraAccess.Concrete.InMemory
         }
 
 
+        public List<Product> GetAll()
+        {
+            return _products;
+        }
+
         public List<Product> GetAllByCategory(int categoryId)
         {
             return _products.Where(p => p.CategoryId == categoryId).ToList();
+        }
+
+        public List<Product> GetAll(Expression<Func<Product, bool>> filter = null)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Product Get(Expression<Func<Product, bool>> filter)
+        {
+            throw new NotImplementedException();
         }
     }
 }

@@ -45,3 +45,24 @@ Dal(DataAccessLayer)-Dao(DataAccessObject)
 * DataAccess >Concrete >InMemory > ( InMemoryProductDal.cs : IProductDal )
                         
 * Business >Abstract  +IProductService             
+--------------------------------------------------------------
+3.02.2021 
+DataAccess 
+** Generic Repository Design Pattern
+
+** Muhtemelen .NetCore 3 yüklü olduðu için v3.1.11; (latestStable 5 = .netCore 5 istiyor!)
+  DataAccess : ManageNugetPackages>EntityFrameworkCore.SqlServer v3.1.11 kurduk
+
+  (DbContext bu framework ile gelir! --Context te kullanýyoruz')
+  
+** Context : db tablolarý ile proje class-larýmýzý iliþkilendirdiðimiz class
+
+** Garbage collector: belli aralýklarla belleði kntrol edip gereksizleri atar. (new lenmiþ class)
+**  //IDisposibale Pattern implementation of c#
+using (resource){...} -------belleði hýzlýca temizleme
+bloðu sona erdiðinde (gel abi topla buralarý)
+       garbage collector a gidip beni bellekten at der. içerisine yazýlan nesneler silinir.
+       genelde context nesnesi için tanýmlýyoruz. 
+       >> context nesnesi biraz pahalý!
+
+

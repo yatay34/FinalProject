@@ -5,7 +5,8 @@ using System.Text;
 
 namespace DaraAccess.Abstract
 {
-    public interface IProductDal
+    //30.01.2021 
+ /*   public interface IProductDal
     {
         List<Product> GetAll();
         void Add(Product product);
@@ -13,6 +14,13 @@ namespace DaraAccess.Abstract
         void Delete(Product product);
 
         List<Product> GetAllByCategory(int categoryId);
+    }*/
+
+    //Generic Repository Design Pattern ile  
+
+    public interface IProductDal : IEntityRepository<Product>
+    { 
+
     }
 }
 
