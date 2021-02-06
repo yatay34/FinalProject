@@ -1,11 +1,11 @@
-﻿using DaraAccess.Abstract;
+﻿using DataAccess.Abstract;
 using Entities.Concrete;
 using System;
 using System.Collections.Generic;
 using System.Linq.Expressions;
 using System.Text;
 
-namespace DaraAccess.Concrete.EntityFramework
+namespace DataAccess.Concrete.EntityFramework
 {
     public class EfCategoryDal : ICategoryDal
     {

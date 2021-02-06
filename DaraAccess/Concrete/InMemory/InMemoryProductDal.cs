@@ -1,4 +1,4 @@
-﻿using DaraAccess.Abstract;
+﻿using DataAccess.Abstract;
 using Entities.Concrete;
 using System;
 using System.Collections.Generic;
@@ -6,7 +6,7 @@ using System.Linq;
 using System.Linq.Expressions;
 using System.Text;
 
-namespace DaraAccess.Concrete.InMemory
+namespace DataAccess.Concrete.InMemory
 {
     public class InMemoryProductDal : IProductDal
     {

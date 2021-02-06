@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.30011.22
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DaraAccess", "DaraAccess\DaraAccess.csproj", "{C439DF86-88F4-48C4-A6FC-AA3734020F85}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DataAccess", "DaraAccess\DataAccess.csproj", "{C439DF86-88F4-48C4-A6FC-AA3734020F85}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Business", "Business\Business.csproj", "{6DE84E95-1117-42E8-A507-E12EC2595F01}"
 EndProject

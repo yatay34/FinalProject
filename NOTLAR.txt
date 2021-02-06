@@ -65,4 +65,6 @@ bloðu sona erdiðinde (gel abi topla buralarý)
        genelde context nesnesi için tanýmlýyoruz. 
        >> context nesnesi biraz pahalý!
 
+///06.02.2021 --- CORE Projesi oluþturup ----- ORTAK KODLAR YER ALACAK
 
+DataAccess

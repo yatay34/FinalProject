@@ -3,7 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace DaraAccess.Abstract
+namespace DataAccess.Abstract
 {
     public interface ICustomerDal : IEntityRepository<Customer>
     {

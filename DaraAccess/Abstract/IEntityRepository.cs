@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using System.Linq.Expressions;
 using System.Text;
 
-namespace DaraAccess.Abstract
+namespace DataAccess.Abstract
 {
     //Generic constraint(kısıt) -- 
     //class : referans tip (örn: int olamaz)

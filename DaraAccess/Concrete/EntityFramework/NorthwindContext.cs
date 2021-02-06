@@ -4,7 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace DaraAccess.Concrete.EntityFramework
+namespace DataAccess.Concrete.EntityFramework
 {
     //Context : db tabloları ile proje classlarını bağlar, ilişkilendirir.
 

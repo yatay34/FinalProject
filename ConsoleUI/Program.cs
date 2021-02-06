@@ -1,6 +1,6 @@
 ﻿using Business.Concrete;
-using DaraAccess.Concrete.EntityFramework;
-using DaraAccess.Concrete.InMemory;
+using DataAccess.Concrete.EntityFramework;
+using DataAccess.Concrete.InMemory;
 using System;
 
 namespace ConsoleUI
