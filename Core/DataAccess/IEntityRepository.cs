@@ -1,10 +1,10 @@
-﻿using Entities.Abstract;
+﻿using Entities;
 using System;
 using System.Collections.Generic;
 using System.Linq.Expressions;
 using System.Text;
 
-namespace DataAccess.Abstract
+namespace DataAccess 
 {
     //Generic constraint(kısıt) -- 
     //class : referans tip (örn: int olamaz)

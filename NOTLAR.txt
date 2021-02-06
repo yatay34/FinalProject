@@ -65,6 +65,33 @@ bloðu sona erdiðinde (gel abi topla buralarý)
        genelde context nesnesi için tanýmlýyoruz. 
        >> context nesnesi biraz pahalý!
 
-///06.02.2021 --- CORE Projesi oluþturup ----- ORTAK KODLAR YER ALACAK
+///06.02.2021  //Code Refactoring 
+//--- CORE Projesi oluþturup ----- ORTAK KODLAR YER ALACAK ((EVRENSEL PROJE)) [ClassLibrary(.NetStandart)]
+// Ortak-larý Core altýna taþýyoruz : 
+DataAccess > IEntityRepository (Taþýndý)
+Entities >   IEntity           (Taþýndý)
++DataAccess>EntityFramework > EfEntityRepositoryBase.cs
 
-DataAccess
+SOLUTION: ManageNugetPackages > Microsoft.EntityFrameworkCore.SqlServer v3.1.11 i 
+           [Core] Projesine de kur 
+
+DataAccess>Concrete>EntityFramework>EfProductDal:IProductDal 
+   sýnýf içeriðini  
+   EfEntityRepositoryBase içerisine taþýyor ve editliyoruz. TEntity, TContext olarak
+
+ >>>>  EfProductDal 
+           : EfEntityRepositoryBase<Product, NorthwindContext>, IProductDal 
+
+
+ORDER tablsunu projeye ekliyoruz
+1. *Entities   >Concrete > Order 
+
+2. *DataAccess >Abstract > IOrderDal  +
+               >Concrete > EntityFramework > EfOrderDal : IOrderDal +
+               >Concrete > EntityFramework > NorthwindContext içerisine "Orders" ekle
+                (EF, benim Order nesnemi db'deki Orders ile iliþkilendir)
+
+3. *Business >Abstract > IOrderService
+             >Concrete > OrderManager : IOrderService
+
+

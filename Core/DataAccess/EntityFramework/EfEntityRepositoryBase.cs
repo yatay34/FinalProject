@@ -1,5 +1,5 @@
-﻿using DataAccess.Abstract;
-using Entities.Concrete;
+﻿using DataAccess;
+using Entities;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
@@ -7,15 +7,18 @@ using System.Linq;
 using System.Linq.Expressions;
 using System.Text;
 
-namespace DataAccess.Concrete.EntityFramework
+namespace Core.DataAccess.EntityFramework
 {
-    public class EfProductDal : IProductDal
+    public class EfEntityRepositoryBase<TEntity, TContext>: IEntityRepository<TEntity>
+
+        where TEntity: class, IEntity, new()
+        where TContext: DbContext, new()
     {
-        public void Add(Product entity)
+        public void Add(TEntity entity)
         {
             //IDisposibale Pattern implementation of c# //perfrmans için using kullanıyoruz.
-            using (NorthwindContext context = new NorthwindContext()) 
-            { 
+            using (TContext context = new TContext())
+            {
                 //git veri kaynağından benim gönderdiğim Product'ta bir nesneyi eşleştir.
                 //yeni ekleme olduğu için eşleştirmeyecek
                 var addedEntity = context.Entry(entity); //ilişkilendirir
@@ -24,19 +27,19 @@ namespace DataAccess.Concrete.EntityFramework
             }
         }
 
-        public void Delete(Product entity)
+        public void Delete(TEntity entity)
         {
-            using (NorthwindContext context = new NorthwindContext()) 
-            {  
+            using (TContext context = new TContext())
+            {
                 var deletedEntity = context.Entry(entity);
-                deletedEntity.State = EntityState.Deleted;   
+                deletedEntity.State = EntityState.Deleted;
                 context.SaveChanges();
             }
         }
 
-        public void Update(Product entity)
+        public void Update(TEntity entity)
         {
-            using (NorthwindContext context = new NorthwindContext())
+            using (TContext context = new TContext())
             {
                 var updatedEntity = context.Entry(entity);
                 updatedEntity.State = EntityState.Modified;
@@ -44,21 +47,21 @@ namespace DataAccess.Concrete.EntityFramework
             }
         }
 
-        public Product Get(Expression<Func<Product, bool>> filter)
+        public TEntity Get(Expression<Func<TEntity, bool>> filter)
         {
-            using (NorthwindContext context = new NorthwindContext())
+            using (TContext context = new TContext())
             {
-                return context.Products.SingleOrDefault(filter);
+                return context.Set<TEntity>().SingleOrDefault(filter);
             }
         }
 
-        public List<Product> GetAll(Expression<Func<Product, bool>> filter = null)
+        public List<TEntity> GetAll(Expression<Func<TEntity, bool>> filter = null)
         {
-            using (NorthwindContext context = new NorthwindContext())
+            using (TContext context = new TContext())
             {
                 return (filter == null)
-                   ? context.Set<Product>().ToList() 
-                   : context.Set<Product>().Where(filter).ToList();
+                   ? context.Set<TEntity>().ToList()
+                   : context.Set<TEntity>().Where(filter).ToList();
             }
         }
 

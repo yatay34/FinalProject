@@ -51,8 +51,7 @@ namespace DataAccess.Concrete.InMemory
             productToUpdate.UnitPrice = product.UnitPrice;
             productToUpdate.UnitsInStock = product.UnitsInStock; 
         }
-
-
+         
         public List<Product> GetAll()
         {
             return _products;

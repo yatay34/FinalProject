@@ -10,6 +10,8 @@ namespace Business.Concrete
     public class ProductManager : IProductService
     {
         IProductDal _productDal;
+
+        /// bağımlılığı constuctor injection ile yapıyoruz.  
         public ProductManager(IProductDal productDal)
         {
             _productDal = productDal;
