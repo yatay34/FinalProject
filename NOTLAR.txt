@@ -91,11 +91,22 @@ ORDER tablsunu projeye ekliyoruz
                >Concrete > EntityFramework > NorthwindContext içerisine "Orders" ekle
                 (EF, benim Order nesnemi db'deki Orders ile iliþkilendir)
 
---------------------------------------------------------------------------------
-
+-------------------------------------------------------------------------------- 
 Core>Entities > IDto
 Entities> DTOs  (Data Transformation Object) :: taþýnacak objeler
 
 Entities> DTOs > ProductDetailDto :IDto 
 
+--------------------------------------------------------------
+10.02.2021 10.ders - WebAPI
+--------------------------------------------------------------
+Core > Utilities (Araçlar) > Results > 
+    + IResult, Result, SuccessResult, ErrorResult
 
+Business>Constrants (Northwind'e ait sabitler için)
+    + Messages
+
+SOLID = (I) : Kullanmayacaðýn bir þeyi yazma
+
+Core > Utilities (Araçlar) > Results >
+    + IDataResult, DataResult, 

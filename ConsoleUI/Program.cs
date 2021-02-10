@@ -20,7 +20,21 @@ namespace ConsoleUI
         {
             //ProductTest();
             //CategoryTest();
-            ProductDetailsDtoTest();
+            //ProductDetailsDtoTest();  
+
+            ProductManager productManager = new ProductManager(new EfProductDal());
+            var result = productManager.GetAll();
+            if (result.Success)
+            {
+                foreach (var product in result.Data)
+                {
+                    Console.WriteLine(product.ProductName + " - " + product.UnitPrice);
+                }
+            }
+            else
+                Console.WriteLine(result.Message);
+            
+            
 
         }
 
@@ -29,21 +43,21 @@ namespace ConsoleUI
             //ProductManager productManager = new ProductManager(new InMemoryProductDal());
             ProductManager productManager = new ProductManager(new EfProductDal());
 
-            foreach (var product in productManager.GetAll())
+            foreach (var product in productManager.GetAll().Data)
             {
                 Console.WriteLine(product.ProductName + " - " + product.UnitPrice);
             }
 
             Console.WriteLine("------------------------");
 
-            foreach (var product in productManager.GetAllByCategoryId(2))
+            foreach (var product in productManager.GetAllByCategoryId(2).Data)
             {
                 Console.WriteLine(product.ProductName + " - " + product.UnitPrice);
             }
 
             Console.WriteLine("------------------------");
 
-            foreach (var product in productManager.GetByUnitPrice(100, 500))
+            foreach (var product in productManager.GetByUnitPrice(100, 500).Data)
             {
                 Console.WriteLine(product.ProductName + " - " + product.UnitPrice);
             }
@@ -62,10 +76,18 @@ namespace ConsoleUI
         private static void ProductDetailsDtoTest()
         {
             ProductManager productManager = new ProductManager(new EfProductDal());
-
-            foreach (var product in productManager.GetProductDetails())
+            var result = productManager.GetProductDetails();
+            
+            if (result.Success)
             {
-                Console.WriteLine(product.ProductName + " - " + product.CategoryName);
+                foreach (var product in result.Data)
+                {
+                    Console.WriteLine(product.ProductName + " - " + product.CategoryName);
+                } 
+            } 
+            else
+            { 
+                Console.WriteLine(result.Message);
             }
 
             Console.WriteLine("------------------------");
