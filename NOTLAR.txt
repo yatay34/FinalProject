@@ -98,7 +98,7 @@ Entities> DTOs  (Data Transformation Object) :: taþýnacak objeler
 Entities> DTOs > ProductDetailDto :IDto 
 
 --------------------------------------------------------------
-10.02.2021 10.ders - WebAPI
+10.02.2021 10.ders - RESULTs
 --------------------------------------------------------------
 Core > Utilities (Araçlar) > Results > 
     + IResult, Result, SuccessResult, ErrorResult
@@ -110,3 +110,80 @@ SOLID = (I) : Kullanmayacaðýn bir þeyi yazma
 
 Core > Utilities (Araçlar) > Results >
     + IDataResult, DataResult, 
+     
+--------------------------------------------------------------
+13.02.2021 11.ders - WebAPI
+--------------------------------------------------------------
+API = RestFul mimariyi destekler. Restful mimari ile çalýþma ortamý sunar. 
+**RestFul Mimari aslýnda, 
+geliþtirdiðimiz .Net'i tanýmayan, bir Java uygulamasýný, bir kotlin uygulamasýný,
+bir iOs uygulamasýnýn bizim sistemimizle iletiþim kurabilmesini saðlayan ortam.  
+**RestFul mimarinin karþýlýðý: 
+  Asp.Net WebAPI (.Net), Spring Mvc (Java), Django (Pyhton), Go..
+
+Asp.Net uygulamasý geliþtireceksin. Bunun için þablonlar: 
+* API:
+Backend de çalýþýr. (bir sunucuda yayýna verilir. Yetki verilen herkes eriþebilir.
+Sadece veri transferi için kullanýlýr. 
+---> sadece web tabanlý data yönetimi (API de olur. 
+Client-side'da kullanýlýr:Angular, React,Vue,Flutter,React-Native,Kotlin,Android)
+
+* MVC (Razor Pages):
+herþey server-side yani server tarafýnda gerçekleþir. 
+Sadece veri transferi deðil, 
+istek karþýlýðýnda ortaya HTML sayfasýnýn çýkmasýný ve talep edene verilmesini saðlar
+Html e kadar her þey server da olur.
+
+
++ NewProject : Asp.Net Core Web Application > API : "WebAPI"
+>> Postman app indir ve kur --Test ortamý  https://www.postman.com/downloads/
+
+(IIS Express -- Apache Tomcat) in karþýlýðý diyebiliriz
+(Web API -- Spring MVC ile geliþtirilen RestFUl prjeler )
+
+** Gelen bütün istekleri Controller karþýlar.
+   Gelen istek = 
+   - Mobil bir uygulama ürünleri listelemek isteleyebilir 
+    (Business trflý her bir fonks istek haline getirilir.)
+   -tarayýcýdan bir siteye gitmek : "kodlama.io" adresine girmek de bir istek "sayfayý getir"
+
+RESTFUL istekleri HTTP protokolü üzerinden gelir. 
+quos? embedded uygulamalar vs cihazlarýn birbirleri ile görüþtürülmesinde TCP 
+RESTFUL --> HTTP --> TCP 
+
+*** controller'da size yapýlabilecek istekler kodlanýr. 
+Sistemimizi kullanmak isteyen CLÝENTlar BÝZE (operasyonlarýmýza) NASIL ÝSTEKTE BULUNABÝLÝR?
+[HttpGet] => insanlar bizim sisteme bir HttpGet isteðinde bulunabilirler
+
+** client: 
+tarayýcý, mobil uygulama, desktp/web uygulamasý, Angular/React/Vue... uygulamalarý
+--------------------------------------------------------------------------------------
+WebAPI > Controllers > 
++New Controller: API Controller EMPTY "ProductsController"
+
+[ApiController]  -> ATTRIBUTE (Java:Annotation)
+public class ProductsController : ControllerBase
+
+ATTRIBUTE : bir classla ilgili bilgi verme, onu imzalama
+--------------------------------------------------------------------------------------
+ public void ConfigureServices(IServiceCollection services)
+ {
+    services.AddControllers();
+
+    //IoC...bana arka planda bir referans oluþtur.
+    //IProductService tipinde bir baðýmlýlýðýn karþýlýðý ProductManager'dýr. 
+    //eðer biri IProductService isterse ProductManager oluþturup ver 
+    //Singleton--1 defa oluþturur.sonraki her talebe o instance ý gönderir
+    //içinde data tutulmuyorsa Singleton kullanýlýr. (sepet uyg kullanýlmaz!!-herkesin sepeti birbirine girer)
+    services.AddSingleton<IProductService, ProductManager>();
+    services.AddSingleton<IProductDal, EfProductDal>();
+             
+    //Sadece injection için üst yöntem yetebilirdi ancak
+    //AOP:AspectOrientedProgramming-
+    //[LogAspect]:fonksiyonlarýn loglanmasý-[Validate][RemoveCache][Transaction][Performance]
+    //IoC Container:
+    //Autofac,Ninject,CastleWindsor,StructureMap,LightInject,DryInject
+  
+    
+
+
