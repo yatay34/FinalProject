@@ -25,19 +25,54 @@ namespace WebAPI.Controllers
             _productService = productService;
         }
 
-        //HttpGet ile çağrılabilir client trfndan 
-        [HttpGet]
-        public List<Product> Get()
-        {
-            ////Dependency chain---bağımlılık zinciri!
-            //IProductService productService = new ProductManager(new EfProductDal());
+        ////HttpGet ile çağrılabilir client trfndan 
+        //[HttpGet]
+        //public List<Product> Get()
+        //{
+        //    //Dependency chain---bağımlılık zinciri!
+        //    IProductService productService = new ProductManager(new EfProductDal()); 
+        //    var result = productService.GetAll();
+        //    return result.Data; 
+        //}
+         
+        //[HttpGet]
+        //public List<Product> Get()
+        //{  
+        //    var result = _productService.GetAll();
+        //    return result.Data; 
+        //}
 
+        //Swagger
+        [HttpGet("getall")]
+        public IActionResult Get()
+        {  
             var result = _productService.GetAll();
-            return result.Data;
+            if (result.Success)
+            {
+                return Ok(result); //200
+            }
 
+            return BadRequest(result); //400
         }
 
+        [HttpPost("add")]
+        public IActionResult Post(Product product)
+        {
+            var result = _productService.Add(product);
+            if (result.Success)
+                return Ok(result);
 
+            return BadRequest(result);
+        }
 
+        [HttpGet("getbyid")]
+        public IActionResult Get(int id)
+        {
+            var result = _productService.GetById(id);
+            if (result.Success)
+                return Ok(result.Data);
+
+            return BadRequest(result.Message); 
+        }
     }
 }
