@@ -112,7 +112,7 @@ Core > Utilities (Araçlar) > Results >
     + IDataResult, DataResult, 
      
 --------------------------------------------------------------
-13.02.2021 11.ders - WebAPI
+13.02.2021 11.ders - WebAPI 
 --------------------------------------------------------------
 API = RestFul mimariyi destekler. Restful mimari ile çalýþma ortamý sunar. 
 **RestFul Mimari aslýnda, 
@@ -184,6 +184,24 @@ ATTRIBUTE : bir classla ilgili bilgi verme, onu imzalama
     //IoC Container:
     //Autofac,Ninject,CastleWindsor,StructureMap,LightInject,DryInject
   
-    
+--------------------------------------------------------------
+17.02.2021 12.ders - WebAPI
+--------------------------------------------------------------
+Interception dediðimiz AoP tekniklerini de kullanabilmek için
+IoC Container: AutoFac, Ninject, CastleWindsor, StructureMap, LightInject, DryInject
 
+       AutoFac - .Net Core da iyi, ücretsiz (AOP desteði de verir.)
+       Postsharp - daha iyi, ücretli
+
+!!! Startup.cs teki yapýyý AutoFact e çeviriyoruz.---------------
+
+> Business > ManageNugetPackages : Autofac (v 6.1.0), 
+                                   Autofac.Extras.DynamicProxy (v6.0.0)
+
+> Business> + "DependencyResolvers" (Baðýmlýlýk Çözücüler)
+                        + "Autofact" > AutofacBusinessModule.cs
+       (Startup.cs teki yapýyý taþýyoruz-baðýmlýlýk yapýsý)
+
+kendi IoC yapýlandýrmasý olan sisteme bizimkini (AutoFac) tanýtmamýz lazým: 
+WebAPI > Program.cs   düzenledik.
 

@@ -31,20 +31,23 @@ namespace WebAPI
         {
             services.AddControllers();
 
-            //IoC...bana arka planda bir referans oluþtur.
-            //IProductService tipinde bir baðýmlýlýðýn karþýlýðý ProductManager'dýr. 
-            //eðer biri IProductService isterse ProductManager oluþturup ver 
-            //Singleton--1 defa oluþturur.sonraki her talebe o instance ý gönderir
-            //içinde data tutulmuyorsa Singleton kullanýlýr. (sepet uyg kullanýlmaz!!-herkesin sepeti birbirine girer)
-            
-            services.AddSingleton<IProductService, ProductManager>();
-            services.AddSingleton<IProductDal, EfProductDal>();
-             
+            ////IoC...bana arka planda bir referans oluþtur.
+            ////IProductService tipinde bir baðýmlýlýðýn karþýlýðý ProductManager'dýr. 
+            ////eðer biri IProductService isterse ProductManager oluþturup ver 
+            ////Singleton--1 defa oluþturur.sonraki her talebe o instance ý gönderir
+            ////içinde data tutulmuyorsa Singleton kullanýlýr. (sepet uyg kullanýlmaz!!-herkesin sepeti birbirine girer)
+
+            //services.AddSingleton<IProductService, ProductManager>();
+            //services.AddSingleton<IProductDal, EfProductDal>();
+
             //Sadece injection için üst yöntem yetebilirdi ancak
             //AOP:AspectOrientedProgramming-
             //[LogAspect]:fonksiyonlarýn loglanmasý-[Validate][RemoveCache][Transaction][Performance]
             //IoC Container:
             //Autofac,Ninject,CastleWindsor,StructureMap,LightInject,DryInject
+
+            //--IoC olarak Autofac kullanmak için 
+            // AutofacBusinessModule e taþýyruz...
 
         }
 
