@@ -13,6 +13,7 @@ LINQ = Language Integrated Query
 --------------------------------------------------------------
 --------------------------------------------------------------
 ctor : constuctor oluþturma snippet
+prop : property oluþturma
 
 * Çýplak class kalmasýn
 * IEntity -- implement eden class bir vt tablosudur. 
@@ -204,4 +205,33 @@ IoC Container: AutoFac, Ninject, CastleWindsor, StructureMap, LightInject, DryIn
 
 kendi IoC yapýlandýrmasý olan sisteme bizimkini (AutoFac) tanýtmamýz lazým: 
 WebAPI > Program.cs   düzenledik.
+--------------------------------------------
+--------------VALIDATIONs---------------------- 
+--------------------------------------------
+///Validation codes --doðrulama : yapýsal uygunluk : "FluentValidation" kullanýcaz
+
+* Business ta Manager'da fonk içerisine yazýlabilir.
+* Entities te property üzerine yazmak X (SOLID e aykýrýlýk olabilir)
+ 
+> Business > ManageNugetPackages : FluentValidation(v9.5.1)      
+
+> Business > +"ValidationRules" > +"FluentValidation"  
+                                       +ProductValidator.cs : AbstractValidator<Product>
+
+--------------------------------------------
+--------------CROSS CUTTING CONCERNs -------------------
+--------------------------------------------
+uygulamayý (katmanlarý) dikine kesen ilgi alanlarý - her katmanda kullanýlabildiði için
+ - validation, log, cache, transaction, authorization, performans yönetimi vs
+
+Core > + "CrossCuttingConcerns" > +"Validation":  "ValidationTool.cs"
+
+
+
+
+
+--------------------------------------------------------------
+21.02.2021 13.ders - AOP
+--------------------------------------------------------------                      
+ 
 

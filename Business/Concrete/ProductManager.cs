@@ -1,13 +1,14 @@
 ﻿using Business.Abstract;
 using Business.Constants;
+using Business.ValidationRules.FluentValidation;
+using Core.CrossCuttingConcerns.Validation;
 using Core.Utilities.Results;
 using DataAccess.Abstract; 
 using Entities.Concrete;
 using Entities.DTOs;
+using FluentValidation;
 using System;
-using System.Collections.Generic;
-using System.Text;
-
+using System.Collections.Generic;  
 namespace Business.Concrete
 {
     public class ProductManager : IProductService
@@ -50,13 +51,27 @@ namespace Business.Concrete
         
         public IResult Add(Product product)
         {
-            ///Business Codes..here..
-            ///
-            if(product.ProductName.Length < 2)
-            {
-                //Magic strings 
-                return new ErrorResult(Messages.ProductNameInvalid);
-            }
+            ///Business Codes - iş ihtiyaçlarımıza uygunluk
+      
+            ///Validation codes --doğrulama : yapısal uygunluk  CORE'a taşıdık. (CCC)
+            //var context = new ValidationContext<Product>(product);
+            //ProductValidator productValidator = new ProductValidator();
+            //var result = productValidator.Validate(context); 
+            //if(!result.IsValid)
+            //{
+            //    throw new FluentValidation.ValidationException(result.Errors);
+            //} 
+
+           ValidationTool.Validate(new ProductValidator(), product);
+           //Loglama
+           //cache-remove
+           //performance
+           //transaction
+           //authorization - yetkilendirme
+
+           //------bunların hepsinin buraya yazılması karmaşa getireceği için
+           //Cross-cutting-concerns'e başvurulur. 
+
 
             _productDal.Add(product); 
             return new SuccessResult(Messages.ProductAdded);
