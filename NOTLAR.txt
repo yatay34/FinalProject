@@ -226,7 +226,32 @@ uygulamayý (katmanlarý) dikine kesen ilgi alanlarý - her katmanda kullanýlabildi
 
 Core > + "CrossCuttingConcerns" > +"Validation":  "ValidationTool.cs"
 
+--------------------------------------------------------------
+ -------Interceptors -------- 
+ --------------------------------------------------------------
+interceptor= araya girmek demek. 
+metod baþý, sonu,hata verdiðinde,belli kesiminde 
 
+ SOLUTION: ManageNugetPack: 
+    Autofac, Autofac.Extensions.DependencyInjection, Autofac.Extras.DynamicProxy
+    (Core prjesine de ekle)
+
+Core> Utilities> + +"Interceptors" 
+>>> +"MethodInterceptionBaseAttribute.cs"  
+>>> +"MethodInterception.cs" ***** 
+>>> +"AspectInterceptorSelector.cs"
+
+--------------------------------------------------------------
+ ------- Aspects -------- Autofac ------  
+--------------------------------------------------------------
+ Core > +"Aspects" > +"Autofac"  (aspectler için Autofac kullanýyruz þu an.. yarýn deðiþebilir: Postsharp olabilir vs)
+                        > +"Validation" > +"ValidationAspect.cs"
+                          
+Add methdunu üzerine ekliyruz: "ProductValidator kullanarak/kurallarýna göre Doðrula"
+
+
+Business.DependencyResolvers.Autofac > AutofacBusinessModule.cs 
+  Load() fonk.da sona GetExecutingAssembly() kýsmýný ekle. 
 
 
 

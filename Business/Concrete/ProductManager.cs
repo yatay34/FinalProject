@@ -1,6 +1,7 @@
 ﻿using Business.Abstract;
 using Business.Constants;
 using Business.ValidationRules.FluentValidation;
+using Core.Aspects.Autofac.Validation;
 using Core.CrossCuttingConcerns.Validation;
 using Core.Utilities.Results;
 using DataAccess.Abstract; 
@@ -27,51 +28,52 @@ namespace Business.Concrete
             if (DateTime.Now.Hour == 06)
                 return new ErrorDataResult<List<Product>>(Messages.MaintenanceTime);
 
-            return new SuccessDataResult<List<Product>>( _productDal.GetAll(), Messages.ProductsListed);
+            return new SuccessDataResult<List<Product>>(_productDal.GetAll(), Messages.ProductsListed);
         }
 
         public IDataResult<List<Product>> GetAllByCategoryId(int id)
         {
-            return new SuccessDataResult<List<Product>>(_productDal.GetAll(p=>p.CategoryId == id), Messages.ProductsListed);
+            return new SuccessDataResult<List<Product>>(_productDal.GetAll(p => p.CategoryId == id), Messages.ProductsListed);
         }
 
         public IDataResult<List<Product>> GetByUnitPrice(decimal min, decimal max)
         {
-            return new SuccessDataResult<List<Product>>(_productDal.GetAll(p => p.UnitPrice>=min && p.UnitPrice<=max), Messages.ProductsListed);
+            return new SuccessDataResult<List<Product>>(_productDal.GetAll(p => p.UnitPrice >= min && p.UnitPrice <= max), Messages.ProductsListed);
         }
 
         public IDataResult<List<ProductDetailDto>> GetProductDetails()
         {
-            return new SuccessDataResult<List<ProductDetailDto>>( _productDal.GetProductDetails() );
+            return new SuccessDataResult<List<ProductDetailDto>>(_productDal.GetProductDetails());
         }
         public IDataResult<Product> GetById(int id)
         {
             return new SuccessDataResult<Product>(_productDal.Get(p => p.ProductId == id));
         }
-        
+
+        [ValidationAspect(typeof(ProductValidator))]
         public IResult Add(Product product)
         {
+            /////Validation codes --doğrulama : yapısal uygunluk  CORE'a taşıdık. (CCC)
+            ////var context = new ValidationContext<Product>(product);
+            ////ProductValidator productValidator = new ProductValidator();
+            ////var result = productValidator.Validate(context); 
+            ////if(!result.IsValid)
+            ////{
+            ////    throw new FluentValidation.ValidationException(result.Errors);
+            ////}  
+
+            ////Loglama
+            ////cache-remove
+            ////performance
+            ////transaction
+            ////authorization - yetkilendirme 
+            ////------bunların hepsinin buraya yazılması karmaşa getireceği için
+            ////Cross-cutting-concerns'e başvurulur 
+
+            //ValidationTool.Validate(new ProductValidator(), product);
+
+
             ///Business Codes - iş ihtiyaçlarımıza uygunluk
-      
-            ///Validation codes --doğrulama : yapısal uygunluk  CORE'a taşıdık. (CCC)
-            //var context = new ValidationContext<Product>(product);
-            //ProductValidator productValidator = new ProductValidator();
-            //var result = productValidator.Validate(context); 
-            //if(!result.IsValid)
-            //{
-            //    throw new FluentValidation.ValidationException(result.Errors);
-            //} 
-
-           ValidationTool.Validate(new ProductValidator(), product);
-           //Loglama
-           //cache-remove
-           //performance
-           //transaction
-           //authorization - yetkilendirme
-
-           //------bunların hepsinin buraya yazılması karmaşa getireceği için
-           //Cross-cutting-concerns'e başvurulur. 
-
 
             _productDal.Add(product); 
             return new SuccessResult(Messages.ProductAdded);
